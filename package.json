@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "build:plp": "tsc -b && BUNDLE_NAME=plp vite build",
+    "build:plp": "BUNDLE_NAME=plp vite build",
     "lint": "eslint ."
   },
   "dependencies": {
