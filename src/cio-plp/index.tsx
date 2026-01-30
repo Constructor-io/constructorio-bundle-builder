@@ -30,6 +30,7 @@ const CioPlp = ({
   // Warn if apiKey is missing
   if (!apiKey) {
     console.error("CioPlp: apiKey is required");
+    window.alert("CioPlp: apiKey is required");
     return;
   }
 
