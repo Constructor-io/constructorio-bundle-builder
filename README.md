@@ -37,7 +37,6 @@ src/
 └── cio-plp/                        # PLP UI library
     ├── README.md                   # PLP-specific documentation
     ├── index.jsx                   # Entry point (mount function)
-    ├── styles.css                  # Component styles
     └── components/
         └── CustomCioPlp.tsx        # Main customization file
 ```
