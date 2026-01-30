@@ -14,8 +14,8 @@ import "@constructor-io/constructorio-ui-plp/styles.css";
  *
  * GETTING STARTED:
  * 1. Edit this file "CustomCioPlp.tsx" to add your customizations
- * 3. Build the bundle: npm run build:bundle
- * 4. Use dist/custom-cio-plp.iife.js in your application
+ * 2. Build the bundle: npm run build:plp
+ * 3. Use dist/custom-cio-plp.js in your application
  */
 
 /*

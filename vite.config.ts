@@ -14,8 +14,9 @@ const bundleConfigs: Record<
   }
 > = {
   plp: {
-    entry: resolve(__dirname, "src/cio-plp/index.jsx"),
-    name: "CustomCioPlp",
+    entry: resolve(__dirname, "src/cio-plp/index.tsx"),
+    // Expose CioPlp globally in the window object
+    name: "CioPlp",
     fileName: "custom-cio-plp",
     outDir: "dist/cio-plp",
     styleId: "cio-plp-styles",
@@ -56,6 +57,7 @@ export default defineConfig({
     },
     rollupOptions: {
       output: {
+        entryFileNames: `${config.fileName}.js`,
         inlineDynamicImports: true,
       },
     },
@@ -63,7 +65,8 @@ export default defineConfig({
     copyPublicDir: false,
     emptyOutDir: true,
     minify: true,
-    sourcemap: true,
+    // To enable sourcemaps, set this to true or 'inline'
+    sourcemap: false,
   },
   define: {
     "process.env.NODE_ENV": JSON.stringify("production"),

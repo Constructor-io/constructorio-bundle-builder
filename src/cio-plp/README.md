@@ -8,7 +8,7 @@ This guide covers customization and usage of the Constructor.io Product Listing 
 npm run build:plp
 ```
 
-This generates `dist/cio-plp/custom-cio-plp.iife.js` - a single JavaScript file containing:
+This generates `dist/cio-plp/custom-cio-plp.js` - a single JavaScript file containing:
 - Your customized PLP components
 - All dependencies (React, Constructor.io UI library)
 - All CSS styles (injected via JS)
@@ -21,7 +21,7 @@ Add a container element, include the script, and call `CioPlp()`:
 
 ```html
 <div id="cio-plp-container"></div>
-<script src="custom-cio-plp.iife.js"></script>
+<script src="custom-cio-plp.js"></script>
 <script>
   CioPlp({
     selector: '#cio-plp-container',
@@ -35,7 +35,7 @@ Add a container element, include the script, and call `CioPlp()`:
 For Shopify integrations, use the built-in Shopify defaults which automatically configure the selector and other settings:
 
 ```html
-<script src="custom-cio-plp.iife.js"></script>
+<script src="custom-cio-plp.js"></script>
 <script>
   CioPlp({
     useShopifyDefaults: true,
@@ -49,10 +49,10 @@ For Shopify integrations, use the built-in Shopify defaults which automatically 
 ```javascript
 CioPlp({
   selector: '#cio-plp-container',  // CSS selector for the container element
-  apiKey: 'YOUR_CONSTRUCTOR_API_KEY',
+  apiKey: 'YOUR_CONSTRUCTOR_API_KEY', // Add your API Key
   includeCSS: true,                // Include default styles (default: true)
   useShopifyDefaults: false,       // Use Shopify default configuration
-  // ...additional CustomCioPlp props
+  // ...additional CioPlp props
 });
 ```
 
@@ -62,14 +62,6 @@ CioPlp({
 | `apiKey` | `string` | - | Your Constructor.io API key |
 | `includeCSS` | `boolean` | `true` | Whether to include the default stylesheet |
 | `useShopifyDefaults` | `boolean` | `false` | Use predefined Shopify selector and configuration |
-
-### Unmounting
-
-To remove the PLP component and clean up resources:
-
-```javascript
-CioPlp.unmount('#cio-plp-container');
-```
 
 ## Customization Guide
 
@@ -125,7 +117,7 @@ You can override these components via render props:
 
 ### Step 2: Add Custom Styles
 
-Edit `src/cio-plp/styles.css` to customize appearance. All CSS is automatically bundled and injected via JavaScript.
+Add custom styles to customize appearance. All CSS is automatically bundled and injected via JavaScript.
 
 ### Step 3: Build and Deploy
 
@@ -133,7 +125,7 @@ Edit `src/cio-plp/styles.css` to customize appearance. All CSS is automatically 
 npm run build:plp
 ```
 
-Copy `dist/cio-plp/custom-cio-plp.iife.js` to your website.
+Copy `dist/cio-plp/custom-cio-plp.js` to your website.
 
 ## Build Output
 
@@ -141,9 +133,8 @@ After running `npm run build:plp`:
 
 ```
 dist/
-└── cio-plp/
-    ├── custom-cio-plp.iife.js      # The bundle (~350KB, ~100KB gzipped)
-    └── custom-cio-plp.iife.js.map  # Source map for debugging
+└── cio-plp/   
+    └── custom-cio-plp.js     # The bundle
 ```
 
 ## Customization Examples

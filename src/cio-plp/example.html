@@ -17,13 +17,13 @@
     <div id="cio-plp-container"></div>
 
     <!-- Include the bundled JS file -->
-    <script src="../../dist/cio-plp/custom-cio-plp.iife.js"></script>
+    <script src="../../dist/cio-plp/custom-cio-plp.js"></script>
 
     <script>
       // Basic usage - mount to a custom selector
       CioPlp({
         selector: '#cio-plp-container',
-        apiKey: 'YOUR_CONSTRUCTOR_API_KEY',
+        // apiKey: 'YOUR_CONSTRUCTOR_API_KEY',
       });
 
       // With Shopify defaults (uses predefined Shopify selector and configuration)
@@ -41,8 +41,6 @@
       //   // ...additional CustomCioPlp props
       // });
 
-      // To unmount the component and clean up resources:
-      // CioPlp.unmount('#cio-plp-container');
     </script>
   </body>
 </html>
