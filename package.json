@@ -4,6 +4,7 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
+    "dev:plp": "BUNDLE_NAME=plp vite dev",
     "build:plp": "BUNDLE_NAME=plp vite build",
     "lint": "eslint ."
   },

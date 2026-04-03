@@ -17,9 +17,23 @@ Build customized, self-contained JavaScript bundles for Constructor.io UI librar
 
 ### Installation
 
+1. Fork this repository to your own GitHub account
+2. Clone your fork and install dependencies:
+
 ```bash
 npm install
 ```
+
+### Development
+
+Start a dev server with hot module replacement for live preview:
+
+```bash
+# Start PLP dev server
+npm run dev:plp
+```
+
+Open `http://localhost:5173` in your browser. You'll be prompted to enter your Constructor.io API key (required) and an optional search query. Your API key is saved in `sessionStorage` so it persists across page reloads.
 
 ### Building Bundles
 
@@ -34,17 +48,23 @@ npm run build:plp
 
 ```
 src/
+├── vite-env.d.ts                   # Vite client type declarations
 └── cio-plp/                        # PLP UI library
     ├── README.md                   # PLP-specific documentation
-    ├── index.jsx                   # Entry point (mount function)
-    └── components/
-        └── CustomCioPlp.tsx        # Main customization file
+    ├── index.tsx                   # Entry point (mount function)
+    ├── components/
+    │   └── CustomCioPlp.tsx        # Main customization file
+    └── dev/                        # Dev server app
+        ├── index.tsx               # Dev entry point
+        ├── Dev.tsx                 # Dev app component
+        └── DevStyles.css           # Dev app styles
 ```
 
 ## Available Scripts
 
 | Script | Description |
 |--------|-------------|
+| `npm run dev:plp` | Start PLP dev server with HMR |
 | `npm run build:plp` | Build the PLP bundle |
 | `npm run lint` | Run ESLint |
 

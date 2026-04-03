@@ -2,6 +2,16 @@
 
 This guide covers customization and usage of the Constructor.io Product Listing Page (PLP) bundle.
 
+## Development
+
+Start a dev server with hot module replacement for live preview:
+
+```bash
+npm run dev:plp
+```
+
+This starts a Vite dev server with HMR. Open `http://localhost:5173` in your browser. You'll be prompted to enter your Constructor.io API key (required) and an optional search query. Your API key is saved in `sessionStorage` so it persists across page reloads. Changes to any source file will hot-reload automatically.
+
 ## Building the Bundle
 
 ```bash
@@ -168,7 +178,11 @@ function CustomCioPlp({ apiKey }) {
   return (
     <CioPlp
       apiKey={apiKey}
-      productCard={(props) => <CustomProductCard {...props} />}
+      renderOverrides={{
+        productCard: {
+          renderHtml: (props) => <CustomProductCard {...props} />,
+        },
+      }}
     />
   );
 }
