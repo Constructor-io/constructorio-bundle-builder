@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Constructor.io PLP - Example</title>
+    <!-- Include the bundled JS file. Loaded eagerly in <head> -->
+    <script src="../../dist/cio-plp/custom-cio-plp.js"></script>
     <style>
       body {
         margin: 0;
@@ -15,9 +17,6 @@
   <body>
     <!-- The PLP component will mount to this element -->
     <div id="cio-plp-container"></div>
-
-    <!-- Include the bundled JS file -->
-    <script src="../../dist/cio-plp/custom-cio-plp.js"></script>
 
     <script>
       // Basic usage - mount to a custom selector
@@ -40,7 +39,6 @@
       //   useShopifyDefaults: false,       // Use Shopify default configuration
       //   // ...additional CustomCioPlp props
       // });
-
     </script>
   </body>
 </html>

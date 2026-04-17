@@ -27,18 +27,24 @@ This generates `dist/cio-plp/custom-cio-plp.js` - a single JavaScript file conta
 
 ### Basic Usage
 
-Add a container element, include the script, and call `CioPlp()`:
+Add a container element, include the bundled script in `<head>` so it starts downloading as early as possible, and call `CioPlp()` from an inline script in the body:
 
 ```html
-<div id="cio-plp-container"></div>
-<script src="custom-cio-plp.js"></script>
-<script>
-  CioPlp({
-    selector: '#cio-plp-container',
-    apiKey: 'YOUR_CONSTRUCTOR_API_KEY',
-  });
-</script>
+<head>
+  <script src="custom-cio-plp.js"></script>
+</head>
+<body>
+  <div id="cio-plp-container"></div>
+  <script>
+    CioPlp({
+      selector: '#cio-plp-container',
+      apiKey: 'YOUR_CONSTRUCTOR_API_KEY',
+    });
+  </script>
+</body>
 ```
+
+See [`src/cio-plp/example.html`](./example.html) for a complete, working reference.
 
 ### With Shopify Defaults
 
@@ -72,6 +78,7 @@ CioPlp({
 | `apiKey` | `string` | - | Your Constructor.io API key |
 | `includeCSS` | `boolean` | `true` | Whether to include the default stylesheet |
 | `useShopifyDefaults` | `boolean` | `false` | Use predefined Shopify selector and configuration |
+| `cioClientOptions` | `object` | `{ sendTrackingEvents: false }` | Options forwarded to the underlying `ConstructorIOClient`. Tracking events are disabled by default; pass `{ sendTrackingEvents: true }` to opt in. |
 
 ## Customization Guide
 

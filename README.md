@@ -44,6 +44,10 @@ Each UI library has its own build command:
 npm run build:plp
 ```
 
+### Example Usage
+
+See [`src/cio-plp/example.html`](./src/cio-plp/example.html) for a complete reference showing how to embed the built `custom-cio-plp.js` bundle on a page.
+
 ## Project Structure
 
 ```
