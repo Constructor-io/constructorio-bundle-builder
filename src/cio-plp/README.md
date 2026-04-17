@@ -27,18 +27,20 @@ This generates `dist/cio-plp/custom-cio-plp.js` - a single JavaScript file conta
 
 ### Basic Usage
 
-Add a container element, include the bundled script in `<head>` so it starts downloading as early as possible, and call `CioPlp()` from an inline script in the body:
+Add a container element, include the bundled script in `<head>` with `defer` so it downloads in parallel with HTML parsing, and call `CioPlp()` from an inline script wrapped in a `DOMContentLoaded` listener so it runs after the deferred bundle has executed:
 
 ```html
 <head>
-  <script src="custom-cio-plp.js"></script>
+  <script defer src="custom-cio-plp.js"></script>
 </head>
 <body>
   <div id="cio-plp-container"></div>
   <script>
-    CioPlp({
-      selector: '#cio-plp-container',
-      apiKey: 'YOUR_CONSTRUCTOR_API_KEY',
+    document.addEventListener('DOMContentLoaded', () => {
+      CioPlp({
+        selector: '#cio-plp-container',
+        apiKey: 'YOUR_CONSTRUCTOR_API_KEY',
+      });
     });
   </script>
 </body>
@@ -51,13 +53,19 @@ See [`src/cio-plp/example.html`](./example.html) for a complete, working referen
 For Shopify integrations, use the built-in Shopify defaults which automatically configure the selector and other settings:
 
 ```html
-<script src="custom-cio-plp.js"></script>
-<script>
-  CioPlp({
-    useShopifyDefaults: true,
-    apiKey: 'YOUR_CONSTRUCTOR_API_KEY',
-  });
-</script>
+<head>
+  <script defer src="custom-cio-plp.js"></script>
+</head>
+<body>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      CioPlp({
+        useShopifyDefaults: true,
+        apiKey: 'YOUR_CONSTRUCTOR_API_KEY',
+      });
+    });
+  </script>
+</body>
 ```
 
 ### Configuration Options
