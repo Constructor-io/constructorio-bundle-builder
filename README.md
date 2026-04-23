@@ -35,6 +35,8 @@ npm run dev:plp
 
 Open `http://localhost:5173` in your browser. You'll be prompted to enter your Constructor.io API key (required) and an optional search query. Your API key is saved in `sessionStorage` so it persists across page reloads.
 
+Start developing in `./Components/CustomCio<Component>.tsx` and see your changes reflected live via HMR.
+
 ### Building Bundles
 
 Each UI library has its own build command:

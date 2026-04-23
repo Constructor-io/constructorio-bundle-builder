@@ -12,6 +12,8 @@ npm run dev:plp
 
 This starts a Vite dev server with HMR. Open `http://localhost:5173` in your browser. You'll be prompted to enter your Constructor.io API key (required) and an optional search query. Your API key is saved in `sessionStorage` so it persists across page reloads. Changes to any source file will hot-reload automatically.
 
+Start developing in `./Components/CustomCioPlp.tsx` and see your changes reflected live via HMR.
+
 ## Building the Bundle
 
 ```bash
