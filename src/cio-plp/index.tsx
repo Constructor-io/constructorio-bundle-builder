@@ -20,6 +20,7 @@ const CioPlp = ({
   includeCSS = true,
   useShopifyDefaults,
   apiKey,
+  cioClientOptions,
   ...rest
 }: CioPlpOptions) => {
   // Guard against SSR environments where document is not available
@@ -67,12 +68,20 @@ const CioPlp = ({
     rootMap.set(containerElement, root);
   }
 
+  // Disable tracking events by default; consumers can opt in by passing
+  // `cioClientOptions: { sendTrackingEvents: true }`.
+  const mergedCioClientOptions = {
+    sendTrackingEvents: false,
+    ...cioClientOptions,
+  };
+
   root.render(
     <React.StrictMode>
       <CustomCioPlp
         {...rest}
         apiKey={apiKey}
         useShopifyDefaults={useShopifyDefaults}
+        cioClientOptions={mergedCioClientOptions}
       />
     </React.StrictMode>,
   );

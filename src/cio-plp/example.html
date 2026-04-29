@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Constructor.io PLP - Example</title>
+    <!-- Deferred so it downloads in parallel with HTML parsing and executes before DOMContentLoaded -->
+    <script defer src="../../dist/cio-plp/custom-cio-plp.js"></script>
     <style>
       body {
         margin: 0;
@@ -16,31 +18,31 @@
     <!-- The PLP component will mount to this element -->
     <div id="cio-plp-container"></div>
 
-    <!-- Include the bundled JS file -->
-    <script src="../../dist/cio-plp/custom-cio-plp.js"></script>
-
     <script>
-      // Basic usage - mount to a custom selector
-      CioPlp({
-        selector: '#cio-plp-container',
-        // apiKey: 'YOUR_CONSTRUCTOR_API_KEY',
+      // Wait for DOMContentLoaded so the deferred bundle above has executed
+      // and CioPlp is defined on the global scope.
+      document.addEventListener('DOMContentLoaded', () => {
+        // Basic usage - mount to a custom selector
+        CioPlp({
+          selector: '#cio-plp-container',
+          apiKey: 'YOUR_CONSTRUCTOR_API_KEY',
+        });
+
+        // With Shopify defaults (uses predefined Shopify selector and configuration)
+        // CioPlp({
+        //   useShopifyDefaults: true,
+        //   apiKey: 'YOUR_CONSTRUCTOR_API_KEY',
+        // });
+
+        // With all options
+        // CioPlp({
+        //   selector: '#cio-plp-container',  // CSS selector for the container element
+        //   apiKey: 'YOUR_CONSTRUCTOR_API_KEY',
+        //   includeCSS: true,                // Include default styles (default: true)
+        //   useShopifyDefaults: false,       // Use Shopify default configuration
+        //   // ...additional CustomCioPlp props
+        // });
       });
-
-      // With Shopify defaults (uses predefined Shopify selector and configuration)
-      // CioPlp({
-      //   useShopifyDefaults: true,
-      //   apiKey: 'YOUR_CONSTRUCTOR_API_KEY',
-      // });
-
-      // With all options
-      // CioPlp({
-      //   selector: '#cio-plp-container',  // CSS selector for the container element
-      //   apiKey: 'YOUR_CONSTRUCTOR_API_KEY',
-      //   includeCSS: true,                // Include default styles (default: true)
-      //   useShopifyDefaults: false,       // Use Shopify default configuration
-      //   // ...additional CustomCioPlp props
-      // });
-
     </script>
   </body>
 </html>

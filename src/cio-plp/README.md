@@ -2,6 +2,18 @@
 
 This guide covers customization and usage of the Constructor.io Product Listing Page (PLP) bundle.
 
+## Development
+
+Start a dev server with hot module replacement for live preview:
+
+```bash
+npm run dev:plp
+```
+
+This starts a Vite dev server with HMR. Open `http://localhost:5173` in your browser. You'll be prompted to enter your Constructor.io API key (required) and an optional search query. Your API key is saved in `sessionStorage` so it persists across page reloads. Changes to any source file will hot-reload automatically.
+
+Start developing in `./Components/CustomCioPlp.tsx` and see your changes reflected live via HMR.
+
 ## Building the Bundle
 
 ```bash
@@ -17,31 +29,45 @@ This generates `dist/cio-plp/custom-cio-plp.js` - a single JavaScript file conta
 
 ### Basic Usage
 
-Add a container element, include the script, and call `CioPlp()`:
+Add a container element, include the bundled script in `<head>` with `defer` so it downloads in parallel with HTML parsing, and call `CioPlp()` from an inline script wrapped in a `DOMContentLoaded` listener so it runs after the deferred bundle has executed:
 
 ```html
-<div id="cio-plp-container"></div>
-<script src="custom-cio-plp.js"></script>
-<script>
-  CioPlp({
-    selector: '#cio-plp-container',
-    apiKey: 'YOUR_CONSTRUCTOR_API_KEY',
-  });
-</script>
+<head>
+  <script defer src="custom-cio-plp.js"></script>
+</head>
+<body>
+  <div id="cio-plp-container"></div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      CioPlp({
+        selector: '#cio-plp-container',
+        apiKey: 'YOUR_CONSTRUCTOR_API_KEY',
+      });
+    });
+  </script>
+</body>
 ```
+
+See [`src/cio-plp/example.html`](./example.html) for a complete, working reference.
 
 ### With Shopify Defaults
 
 For Shopify integrations, use the built-in Shopify defaults which automatically configure the selector and other settings:
 
 ```html
-<script src="custom-cio-plp.js"></script>
-<script>
-  CioPlp({
-    useShopifyDefaults: true,
-    apiKey: 'YOUR_CONSTRUCTOR_API_KEY',
-  });
-</script>
+<head>
+  <script defer src="custom-cio-plp.js"></script>
+</head>
+<body>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      CioPlp({
+        useShopifyDefaults: true,
+        apiKey: 'YOUR_CONSTRUCTOR_API_KEY',
+      });
+    });
+  </script>
+</body>
 ```
 
 ### Configuration Options
@@ -62,6 +88,7 @@ CioPlp({
 | `apiKey` | `string` | - | Your Constructor.io API key |
 | `includeCSS` | `boolean` | `true` | Whether to include the default stylesheet |
 | `useShopifyDefaults` | `boolean` | `false` | Use predefined Shopify selector and configuration |
+| `cioClientOptions` | `object` | `{ sendTrackingEvents: false }` | Options forwarded to the underlying `ConstructorIOClient`. Tracking events are disabled by default; pass `{ sendTrackingEvents: true }` to opt in. |
 
 ## Customization Guide
 
@@ -168,7 +195,11 @@ function CustomCioPlp({ apiKey }) {
   return (
     <CioPlp
       apiKey={apiKey}
-      productCard={(props) => <CustomProductCard {...props} />}
+      renderOverrides={{
+        productCard: {
+          renderHtml: (props) => <CustomProductCard {...props} />,
+        },
+      }}
     />
   );
 }

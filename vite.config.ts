@@ -1,4 +1,4 @@
-import { defineConfig } from "vite";
+import { defineConfig, type UserConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js";
 import { resolve } from "path";
@@ -11,6 +11,7 @@ const bundleConfigs: Record<
     fileName: string;
     outDir: string;
     styleId: string;
+    root: string;
   }
 > = {
   plp: {
@@ -20,55 +21,70 @@ const bundleConfigs: Record<
     fileName: "custom-cio-plp",
     outDir: "dist/cio-plp",
     styleId: "cio-plp-styles",
+    root: resolve(__dirname, "src/cio-plp"),
   },
 };
 
-const bundleName = process.env.BUNDLE_NAME;
+export default defineConfig(({ command }) => {
+  const bundleName = process.env.BUNDLE_NAME;
 
-if (!bundleName || !bundleConfigs[bundleName]) {
-  throw new Error(
-    `Invalid BUNDLE_NAME: "${bundleName}". Valid options: ${Object.keys(bundleConfigs).join(", ")}`,
-  );
-}
+  if (!bundleName || !bundleConfigs[bundleName]) {
+    throw new Error(
+      `Invalid BUNDLE_NAME: "${bundleName}". Valid options: ${Object.keys(bundleConfigs).join(", ")}`,
+    );
+  }
 
-const config = bundleConfigs[bundleName];
+  const config = bundleConfigs[bundleName];
 
-export default defineConfig({
-  plugins: [
-    react(),
-    cssInjectedByJsPlugin({
-      styleId: config.styleId,
-    }), // Injects CSS into the JS bundle
-  ],
-  resolve: {
-    // Ensure all React imports resolve to the same instance
-    dedupe: ["react", "react-dom"],
-    alias: {
-      react: resolve(__dirname, "node_modules/react"),
-      "react-dom": resolve(__dirname, "node_modules/react-dom"),
-    },
-  },
-  build: {
-    lib: {
-      entry: config.entry,
-      name: config.name,
-      fileName: config.fileName,
-      formats: ["iife"],
-    },
-    rollupOptions: {
-      output: {
-        entryFileNames: `${config.fileName}.js`,
-        inlineDynamicImports: true,
+  const sharedConfig: UserConfig = {
+    plugins: [react()],
+    resolve: {
+      dedupe: ["react", "react-dom"],
+      alias: {
+        react: resolve(__dirname, "node_modules/react"),
+        "react-dom": resolve(__dirname, "node_modules/react-dom"),
       },
     },
-    outDir: config.outDir,
-    copyPublicDir: false,
-    emptyOutDir: true,
-    minify: true,
-    // To enable sourcemaps, set this to true or 'inline'
-    sourcemap: false,
-  },
-  define: {
-    "process.env.NODE_ENV": JSON.stringify("production"),
-  },
+  };
+
+  // Dev server mode
+  if (command === "serve") {
+    return {
+      ...sharedConfig,
+      root: config.root,
+    };
+  }
+
+  // Build mode (library bundle)
+  return {
+    ...sharedConfig,
+    plugins: [
+      ...sharedConfig.plugins!,
+      cssInjectedByJsPlugin({
+        styleId: config.styleId,
+      }),
+    ],
+    build: {
+      lib: {
+        entry: config.entry,
+        name: config.name,
+        fileName: config.fileName,
+        formats: ["iife"],
+      },
+      rollupOptions: {
+        output: {
+          entryFileNames: `${config.fileName}.js`,
+          inlineDynamicImports: true,
+        },
+      },
+      outDir: config.outDir,
+      copyPublicDir: false,
+      emptyOutDir: true,
+      minify: true,
+      sourcemap: false,
+    },
+    define: {
+      "process.env.NODE_ENV": JSON.stringify("production"),
+    },
+  };
 });
