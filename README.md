@@ -1,5 +1,9 @@
 # Constructor.io Bundle Builder
 
+[![npm](https://img.shields.io/npm/v/@constructor-io/constructorio-bundle-builder)](https://www.npmjs.com/package/@constructor-io/constructorio-bundle-builder)
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Constructor-io/constructorio-bundle-builder/blob/master/LICENSE)
+[![Minzipped Size](https://img.shields.io/bundlephobia/minzip/@constructor-io/constructorio-bundle-builder)](https://bundlephobia.com/result?p=@constructor-io/constructorio-bundle-builder)
+
 Build customized, self-contained JavaScript bundles for Constructor.io UI libraries. This tool allows you to customize Constructor.io UI components and generate a single JS file that can be embedded on any website.
 
 ## Supported UI Libraries

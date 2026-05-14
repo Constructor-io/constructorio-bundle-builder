@@ -1,5 +1,7 @@
 {
   "name": "constructorio-bundle-builder",
+  "author": "Constructor.io Corporation",
+  "license": "MIT",
   "private": true,
   "version": "0.0.1",
   "type": "module",
