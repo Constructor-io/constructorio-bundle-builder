@@ -1,5 +1,7 @@
 # Constructor.io Bundle Builder
 
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Constructor-io/constructorio-bundle-builder/blob/master/LICENSE)
+
 Build customized, self-contained JavaScript bundles for Constructor.io UI libraries. This tool allows you to customize Constructor.io UI components and generate a single JS file that can be embedded on any website.
 
 ## Supported UI Libraries
