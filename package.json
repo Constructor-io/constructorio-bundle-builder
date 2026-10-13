@@ -9,7 +9,7 @@
     "dev:plp": "BUNDLE_NAME=plp vite dev",
     "build:plp": "BUNDLE_NAME=plp vite build",
     "lint": "eslint .",
-    "check-license": "license-checker --onlyAllow 'Apache-2.0;BSD-3-Clause;MIT;0BSD;BSD-2-Clause;ISC'"
+    "check-license": "license-checker --production --onlyAllow 'Apache-2.0;BSD-3-Clause;MIT;0BSD;BSD-2-Clause;ISC'"
   },
   "dependencies": {
     "@constructor-io/constructorio-ui-plp": "^1.8.0",
