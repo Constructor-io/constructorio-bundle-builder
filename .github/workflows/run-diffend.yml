@@ -16,7 +16,10 @@ jobs:
       - name: Set up node
         uses: actions/setup-node@v4
         with:
-          node-version: '22.20.0'
+          # Diffend's npm wrapper crashes ("s.warn is not a function") on the
+          # npm that ships with Node 22. This job only runs `npm install` for
+          # the supply-chain scan, so it stays on 18.13.0.
+          node-version: '18.13.0'
       - name: Install Diffend (Mend)
         run: npm install -g https://my.diffend.io/releases/npm/stable.tgz
       - name: Install dependencies with Diffend
