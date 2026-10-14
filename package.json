@@ -8,7 +8,8 @@
   "scripts": {
     "dev:plp": "BUNDLE_NAME=plp vite dev",
     "build:plp": "BUNDLE_NAME=plp vite build",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "check-license": "license-checker --production --onlyAllow 'Apache-2.0;BSD-3-Clause;MIT;0BSD;BSD-2-Clause;ISC'"
   },
   "dependencies": {
     "@constructor-io/constructorio-ui-plp": "^1.8.0",
@@ -25,6 +26,7 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
     "globals": "^16.5.0",
+    "license-checker": "^25.0.1",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.4",
     "vite": "^7.2.4",
