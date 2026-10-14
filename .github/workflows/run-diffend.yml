@@ -12,11 +12,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Set up node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
-          node-version: '18.13.0'
+          node-version: '22.20.0'
       - name: Install Diffend (Mend)
         run: npm install -g https://my.diffend.io/releases/npm/stable.tgz
       - name: Install dependencies with Diffend
